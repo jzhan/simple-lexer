@@ -60,7 +60,7 @@ class Lexer {
         if(current_position < len and str[current_position] == '.') {
           current_position = current_position + 1;
           float fnum = num;
-          int divider = 10;
+          float divider = 10.f;
 
           while(current_position < len and isDigit(str[current_position])) {
             fnum = fnum + (str[current_position] - '0') / divider;
