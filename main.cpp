@@ -80,7 +80,7 @@ class Lexer {
         int i = 0;
 
         while(current_position < len and isIdentifier(str[current_position])) {
-          if(i < 27) {
+          if(i < 26) {
             id[i] = str[current_position];
             i = i + 1;
           }
@@ -192,6 +192,5 @@ int main() {
     std::cout << " ";
   }
     
-  
   return 0;
 }
