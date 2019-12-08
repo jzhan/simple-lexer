@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-enum TokenID {INT = 1, FLOAT, ID, PLUS, MIN, MUL, DIV, ASSIGN, LPAREN, RPAREN, ILLEGAL};
+enum TokenID {INT = 1, FLOAT, ID, PLUS, MIN, MUL, DIV, ASSIGN, LPAREN, RPAREN, ILLEGAL, SPACE};
 
 struct Token {
   TokenID type;
@@ -42,8 +42,10 @@ class Lexer {
     }
 
     bool getNextToken() {
-      while(current_position < len and str[current_position] == ' ')
+      while(current_position < len and str[current_position] == ' '){
+        current_token.type = SPACE;
         current_position = current_position + 1;
+      }
 
       if(current_position == len) 
         return false;
@@ -53,7 +55,6 @@ class Lexer {
 
         while(current_position < len and isDigit(str[current_position])) {
           num = num * 10 + (str[current_position] - '0');
-
           current_position = current_position + 1;
         }
 
@@ -148,7 +149,7 @@ class Lexer {
 int main() {
   char str[200];
   
-  gets(str);
+  std::cin.getline(str, 200);
 
   Lexer lexer(str);
 
@@ -187,10 +188,15 @@ int main() {
       case ILLEGAL:
         std::cout << "[" << lexer.current_token.info.ilchr << ": ILLEGAL]";
         break;
+      case SPACE:
+        break;
     }
 
     std::cout << " ";
   }
+
+  std::cout << "\n";
     
   return 0;
 }
+
